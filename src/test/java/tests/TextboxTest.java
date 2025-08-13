@@ -44,8 +44,4 @@ public class TextboxTest {
         textboxPage.clickSubmit();
         Assert.assertEquals(textboxPage.getFullName(), "Name:" + fullName, "Full Name does not match");
     }
-
-
-
-
 }
