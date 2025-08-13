@@ -28,7 +28,7 @@ public class TextboxTest {
 
     }
 
-    @DataProvider(name = "fullData1")
+    @DataProvider(name = "TC01-Validate Information")
     public Object [][] fullData() {
         return new Object[][]{
                 {"Tran Thuy Vy", "thuyvy@gmail.com", "123 Le Loi, HCM", "456 Le Loi, HCM"},
@@ -36,12 +36,15 @@ public class TextboxTest {
         };
     }
 
-    @Test (dataProvider = "fullData1")
+    @DataProvider(name = "TC02-Invalid Information", parallel = true)
+
+    @Test (dataProvider = "TC01-Validate Information")
     public void verifyInformationSubmission(String fullName, String email, String currentAddress, String permanentAddress) {
         textboxPage.fillForm(fullName, email, currentAddress, permanentAddress);
         textboxPage.clickSubmit();
         Assert.assertEquals(textboxPage.getFullName(), "Name:" + fullName, "Full Name does not match");
     }
+
 
 
 
