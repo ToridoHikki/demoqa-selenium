@@ -30,6 +30,5 @@ public class CommonActions extends Browsers {
                 .getText();
     };
 
-
 }
 

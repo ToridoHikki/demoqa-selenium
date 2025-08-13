@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="TEST" parallel="false">
+    <parameter name="headless" value="false"/>
+    <test name="DemoTest">
+        <packages>
+            <package name="tests"/>
+        </packages>
+    </test>
+</suite>
