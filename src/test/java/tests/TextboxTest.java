@@ -15,9 +15,10 @@ import utils.CommonActions;
 import static utils.Browsers.openBrowser;
 import static utils.CommonActions.driver;
 
-public class TextboxTest extends Base {
+public class TextboxTest {
 
     TextboxPage textboxPage;
+
 
     @BeforeMethod
 //    @Parameter(names = "headless", description = "Browser to run the test on")
