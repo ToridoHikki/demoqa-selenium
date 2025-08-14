@@ -30,5 +30,21 @@ public class CommonActions extends Browsers {
                 .getText();
     };
 
+    public static void check (By by) {
+        if (!isSelected(by)) {
+            click(by);
+        }
+    }
+
+    public static void uncheck(By by) {
+        if (isSelected(by)) {
+            click(by);
+        }
+    }
+
+    public static boolean isSelected(By by) {
+        return driver.findElement(by).isSelected();
+    };
+
 }
 
