@@ -1,19 +1,10 @@
 package tests;
 
-import com.beust.jcommander.Parameter;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.elements.Base;
-import pages.elements.TextboxPage;
-import utils.CommonActions;
-
-import static utils.Browsers.openBrowser;
-import static utils.CommonActions.driver;
+import pages.TextboxPage;
 
 public class TextboxTest {
 

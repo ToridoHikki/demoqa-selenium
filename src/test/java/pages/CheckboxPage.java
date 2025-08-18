@@ -1,4 +1,4 @@
-package pages.elements;
+package pages;
 
 import org.openqa.selenium.By;
 import utils.CommonActions;
@@ -18,7 +18,13 @@ public class CheckboxPage {
     }
 
     public void check(String checkboxName) {
-        CommonActions.check(By.xpath("//span[.='" + checkboxName + "']/preceding-sibling::span[1]::[@class=['rct-checkbox']"));
+
+        CommonActions.click(By.cssSelector("."));
+        CommonActions.check(By.cssSelector(String.format(".rct-title:contains('%s') + .rct-checkbox", checkboxName)));
+    }
+
+    public void check1() {
+        CommonActions.click(By.id("tree-node-desktop"));
     }
 
     public boolean isChecked(String checkboxName) {
@@ -26,5 +32,5 @@ public class CheckboxPage {
                 .isSelected(By.xpath("//span[@class='rct-title' and text()='" + checkboxName + "']/parent::label"));
     }
 
-
 }
+
