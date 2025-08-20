@@ -57,6 +57,26 @@ public class BaseTest {
                 break;
             case "chrome-headless":
                 ChromeOptions headlessOptions = new ChromeOptions();
+                // Chặn save password + password leak detection
+                Map<String, Object> prefs1 = new HashMap<>();
+                prefs1.put("credentials_enable_service", false);
+                prefs1.put("profile.password_manager_enabled", false);
+                prefs1.put("profile.default_content_setting_values.notifications", 2); // Block notifications
+                prefs1.put("profile.default_content_setting_values.geolocation", 2);    // Block location
+                prefs1.put("autofill.profile_enabled", false); // Disable autofill
+                headlessOptions.setExperimentalOption("prefs", prefs1);
+
+                // Chặn thông báo "Change your password"
+                headlessOptions.addArguments("--disable-features=PasswordManagerEnabled");
+                headlessOptions.addArguments("--disable-features=PasswordLeakDetection");
+                headlessOptions.addArguments("--disable-features=PasswordCheck");
+                // Chạy incognito để không dùng mật khẩu đã lưu
+                headlessOptions.addArguments("--incognito");
+
+                // Loại bỏ "Chrome is being controlled by automated software"
+                headlessOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+                headlessOptions.setExperimentalOption("useAutomationExtension", false);
+
                 headlessOptions.addArguments("headless");
                 driver = new ChromeDriver(headlessOptions);
                 break;
@@ -77,11 +97,11 @@ public class BaseTest {
 
     }
 
-//    @AfterClass
-//    public void tearDown() {
-//        if (driver != null) {
-//            driver.quit();
-//        }
-//    }
+    @AfterClass
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
 }
