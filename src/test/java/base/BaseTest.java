@@ -8,6 +8,8 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import utils.DriverUtils;
 
 import java.time.Duration;
@@ -21,9 +23,9 @@ public class BaseTest {
     protected WebDriver driver;
     protected DriverUtils driverUtils;
 
-
+    @Parameters("browser")
     @BeforeClass
-    public void setUp(String browser) {
+    public void setUp(@Optional("chrome") String browser) {
         // Disable Selenium logs
         Logger.getLogger("org.openqa.selenium").setLevel(Level.OFF);
         switch (browser.toLowerCase()) {
@@ -50,8 +52,8 @@ public class BaseTest {
                 // Loại bỏ "Chrome is being controlled by automated software"
                 chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
                 chromeOptions.setExperimentalOption("useAutomationExtension", false);
-                chromeOptions.addArguments("headless");
-                driver = new ChromeDriver();
+//                chromeOptions.addArguments("headless");
+                driver = new ChromeDriver(chromeOptions);
                 break;
             case "chrome-headless":
                 ChromeOptions headlessOptions = new ChromeOptions();
@@ -75,11 +77,11 @@ public class BaseTest {
 
     }
 
-    @AfterClass
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+//    @AfterClass
+//    public void tearDown() {
+//        if (driver != null) {
+//            driver.quit();
+//        }
+//    }
 
 }

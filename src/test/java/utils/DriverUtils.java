@@ -1,11 +1,9 @@
 package utils;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
@@ -15,22 +13,20 @@ import java.time.Duration;
 
 public class DriverUtils {
 
-
     private final WebDriver driver;
-    private final WebDriverWait wait;
+    public static WebDriverWait wait;
 
 
     public DriverUtils(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
-
-
 
     public void waitForElementVisible(By by, int timeOut) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
+
 
     public void click(By by) {
         wait
@@ -48,15 +44,21 @@ public class DriverUtils {
         }
     }
 
+    
+
     public void fill(By by, String text) {
-        driver.findElement(by).sendKeys(text);
+        WebElement element = driver.findElement(by);
+        element.clear();
+        element.sendKeys(text);
     }
 
-    public void getText(By by) {
-        wait
+    public String getElementText(By by) {
+        return wait
                 .until(ExpectedConditions.visibilityOfElementLocated(by))
                 .getText();
+
     }
+
 
     public void check(By by) {
         if (!isSelected(by)) {
@@ -74,11 +76,30 @@ public class DriverUtils {
         return driver.findElement(by).isSelected();
     }
 
+    public boolean isVisible(By by) {
+        return wait
+                .until(ExpectedConditions.visibilityOfElementLocated(by))
+                .isDisplayed();
+    }
 
+    public Select getSelect(By by) {
+        return new Select(driver.findElement(by));
+    }
 
+    public void scrollToElement(By locator) {
+        WebElement element = driver.findElement(locator); // Tìm phần tử theo locator
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element); // Cuộn đến phần tử
+    }
 
+    public String getCurrentURL () {
+        return driver.getCurrentUrl();
+    }
 
-
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
 
 
 }
+
