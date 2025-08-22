@@ -100,6 +100,15 @@ public class DriverUtils {
         return driver.getTitle();
     }
 
+    public void uploadFile(By by, String filePath) {
+        WebElement fileInput = driver.findElement(by);
+        fileInput.sendKeys(filePath);
+    }
+
+
+
+
+
 
 }
 
