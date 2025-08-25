@@ -28,7 +28,7 @@ public class ContactUsTest extends BaseTest {
         contactUsPage.clickSubmitButton();
         String successMessage = contactUsPage.getSuccessMessage();
         Assert.assertEquals(successMessage, "Success! Your details have been submitted successfully.");
-
+        contactUsPage.clickHomeButton();
     }
 
 }

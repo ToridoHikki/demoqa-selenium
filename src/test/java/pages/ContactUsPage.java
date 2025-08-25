@@ -9,6 +9,7 @@ public class ContactUsPage {
 
     private final DriverUtils driverUtils;
     private final By fileInput = By.xpath("//*[@name='upload_file']");
+    private final By homeBtn = By.xpath("//a[@href='/']");
 
     public ContactUsPage(WebDriver driver) {
         this.driverUtils = new DriverUtils(driver); // khởi tạo DriverUtils
@@ -50,6 +51,10 @@ public class ContactUsPage {
 
     public void clickSubmitButton() {
         driverUtils.click(By.xpath("//input[@data-qa='submit-button']"));
+    }
+
+    public void clickHomeButton() {
+        driverUtils.click(homeBtn);
     }
 
 
