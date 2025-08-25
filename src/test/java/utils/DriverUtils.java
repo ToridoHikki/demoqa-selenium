@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 import java.time.Duration;
 
 
@@ -26,6 +27,14 @@ public class DriverUtils {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
+
+    public WebElement find(By locator) {
+        return wait
+                .until(ExpectedConditions.visibilityOfElementLocated(locator))
+                .findElement(locator);
+//                driver.findElement(locator);
+    }
+
 
 
     public void click(By by) {
@@ -101,14 +110,14 @@ public class DriverUtils {
     }
 
     public void uploadFile(By by, String filePath) {
-        WebElement fileInput = driver.findElement(by);
-        fileInput.sendKeys(filePath);
+
+        File file = new File(filePath);
+        WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(by)).findElement(by);
+        fileInput.sendKeys(file.getAbsolutePath());
     }
 
-
-
-
-
-
+    public String getText(By by) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(by)).getText();
+    }
 }
 

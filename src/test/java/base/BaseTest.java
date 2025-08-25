@@ -52,6 +52,7 @@ public class BaseTest {
                 // Loại bỏ "Chrome is being controlled by automated software"
                 chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
                 chromeOptions.setExperimentalOption("useAutomationExtension", false);
+                chromeOptions.setCapability("unhandledPromptBehavior", "accept");
 //                chromeOptions.addArguments("headless");
                 driver = new ChromeDriver(chromeOptions);
                 break;
@@ -76,6 +77,8 @@ public class BaseTest {
                 // Loại bỏ "Chrome is being controlled by automated software"
                 headlessOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
                 headlessOptions.setExperimentalOption("useAutomationExtension", false);
+                headlessOptions.setCapability("unhandledPromptBehavior", "accept");
+
 
                 headlessOptions.addArguments("headless");
                 driver = new ChromeDriver(headlessOptions);
@@ -97,11 +100,11 @@ public class BaseTest {
 
     }
 
-    @AfterClass
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+//    @AfterClass
+//    public void tearDown() {
+//        if (driver != null) {
+//            driver.quit();
+//        }
+//    }
 
 }
